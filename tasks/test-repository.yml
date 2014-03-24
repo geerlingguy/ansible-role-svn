@@ -1,0 +1,14 @@
+---
+- name: Create a test repository.
+  command: >
+    svnadmin create testrepo
+    chdir=/var/www/svn
+    creates=/var/www/svn/testrepo/README.txt
+
+- name: Set ownership for test repository.
+  file: >
+    path=/var/www/svn
+    owner=root
+    group=root
+    recurse=yes
+  notify: restart apache

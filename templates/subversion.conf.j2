@@ -1,0 +1,8 @@
+LoadModule dav_svn_module     modules/mod_dav_svn.so
+LoadModule authz_svn_module   modules/mod_authz_svn.so
+
+<Location /svn>
+   DAV svn
+   SVNParentPath {{ svn_repository_home }}
+   Allow from All
+</Location>

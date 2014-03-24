@@ -1,0 +1,36 @@
+---
+- name: Ensure SVN packages are installed.
+  yum: pkg={{ item }} state=installed
+  with_items:
+    - mod_dav_svn
+    - subversion
+
+- name: Ensure svn home folder exists.
+  file: path={{ svn_repository_home }} state=directory
+
+- name: Copy subversion configuration file.
+  template: >
+    src=subversion.conf.j2
+    dest=/etc/httpd/conf.d/subversion.conf
+    owner=root
+    group=root
+  notify: restart apache
+
+- name: Create a test repository.
+  command: >
+    svnadmin create testrepo
+    chdir={{ svn_repository_home }}
+    creates={{ svn_repository_home }}/testrepo/README.txt
+  when: svn_create_test_repo
+
+- name: Set ownership for svn directories.
+  file: >
+    path={{ svn_repository_home }}
+    owner=apache
+    group=apache
+    recurse=yes
+  notify: restart apache
+
+# TODO: Is there any way to specify `--root {{ svn_repository_home }}`? Environment?
+- name: Ensure svnserve service is started.
+  service: name=svnserve state=started enabled=yes
