@@ -4,6 +4,15 @@
   with_items:
     - mod_dav_svn
     - subversion
+  when: ansible_os_family == 'RedHat'
+
+# To be used once Debian is supported in all dependencies.
+# - name: Ensure SVN packages are installed (Debian).
+#   apt: pkg={{ item }} state=installed
+#   with_items:
+#     - subversion
+#     - libapache2-svn
+#   when: ansible_os_family == 'Debian'
 
 - name: Ensure svn home folder exists.
   file: path={{ svn_repository_home }} state=directory
