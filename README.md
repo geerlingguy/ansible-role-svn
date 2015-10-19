@@ -16,7 +16,6 @@ Whether to create a example respository 'testrepo', which will be available at `
 
 ## Dependencies
 
-  - geerlingguy.repo-epel
   - geerlingguy.apache
 
 ## Example Playbook
