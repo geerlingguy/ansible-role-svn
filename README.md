@@ -12,6 +12,10 @@ The `svnserve` service, which allows access to repositories via the `svn://` pro
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+    svn_repository_home: /var/svn
+
+The SVN repository directory that will be served by `svnserve` through Apache.
+
     svn_create_test_repo: true
 
 Whether to create a example respository 'testrepo', which will be available at `http://[hostname]/svn/testrepo`.
