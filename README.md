@@ -1,5 +1,7 @@
 # Ansible Role: SVN
 
+[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-svn.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-svn)
+
 Installs SVN on any RHEL/CentOS Linux system.
 
 ## Requirements
@@ -8,7 +10,7 @@ The `svnserve` service, which allows access to repositories via the `svn://` pro
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `vars/main.yml`):
+Available variables are listed below, along with default values (see `defaults/main.yml`):
 
     svn_create_test_repo: true
 
@@ -21,14 +23,8 @@ Whether to create a example respository 'testrepo', which will be available at `
 ## Example Playbook
 
     - hosts: servers
-      vars_files:
-        - vars/main.yml
       roles:
-        - { role: geerlingguy.svn }
-
-*Inside `vars/main.yml`*:
-
-    TODO
+        - geerlingguy.svn
 
 ## License
 
