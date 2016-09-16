@@ -44,6 +44,5 @@
     recurse: yes
   notify: restart apache
 
-# TODO: Is there any way to specify `--root {{ svn_repository_home }}`?
-- name: Ensure svnserve service is started.
-  service: name=svnserve state=started enabled=yes
+- name: Ensure SVN is started.
+  service: name={{ svn_daemon }} state=started enabled=yes

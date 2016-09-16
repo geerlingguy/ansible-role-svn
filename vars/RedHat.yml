@@ -1,3 +1,4 @@
 ---
+svn_daemon: svnserve
 svn_apache_user: apache
 svn_apache_conf_path: /etc/httpd/conf.d
