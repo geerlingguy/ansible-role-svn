@@ -44,5 +44,12 @@
     recurse: yes
   notify: restart apache
 
+- name: Create init script for svnserve (Debian).
+  copy:
+    src: svnserve
+    dest: /etc/init.d/svnserve
+    mode: 0755
+  when: ansible_os_family == 'Debian'
+
 - name: Ensure SVN is started.
-  service: name={{ svn_daemon }} state=started enabled=yes
+  service: name=svnserve state=started enabled=yes
