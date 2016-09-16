@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-svn.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-svn)
 
-Installs SVN on any RHEL/CentOS Linux system.
+Installs [Apache SVN](https://subversion.apache.org/) (Subversion) on any RHEL/CentOS or Debian/Ubuntu Linux system.
 
 ## Requirements
 

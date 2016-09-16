@@ -4,7 +4,7 @@ dependencies:
 
 galaxy_info:
   author: geerlingguy
-  description: SVN web server
+  description: SVN web server for Linux
   company: "Midwestern Mac, LLC"
   license: "license (BSD, MIT)"
   min_ansible_version: 2.0
