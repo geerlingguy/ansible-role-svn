@@ -36,8 +36,8 @@
 - name: Set ownership for svn directories.
   file:
     path: "{{ svn_repository_home }}"
-    owner: apache
-    group: apache
+    owner: "{{ apache_user }}"
+    group: "{{ apache_user }}"
     recurse: yes
   notify: restart apache
 

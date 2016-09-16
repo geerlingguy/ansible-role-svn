@@ -1,2 +1,3 @@
 ---
+apache_user: www-data
 apache_conf_path: /etc/apache2/sites-enabled
