@@ -24,7 +24,7 @@
 - name: Copy subversion configuration file.
   template:
     src: subversion.conf.j2
-    dest: "{{ apache_conf_path }}/subversion.conf"
+    dest: "{{ svn_apache_conf_path }}/subversion.conf"
     owner: root
     group: root
   notify: restart apache
