@@ -1,4 +1,7 @@
 ---
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - name: Ensure SVN packages are installed.
   yum: "name={{ item }} state=installed"
   with_items:
@@ -36,8 +39,8 @@
 - name: Set ownership for svn directories.
   file:
     path: "{{ svn_repository_home }}"
-    owner: "{{ apache_user }}"
-    group: "{{ apache_user }}"
+    owner: "{{ svn_apache_user }}"
+    group: "{{ svn_apache_user }}"
     recurse: yes
   notify: restart apache
 
