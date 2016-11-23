@@ -50,6 +50,17 @@
     dest: /etc/init.d/svnserve
     mode: 0755
   when: ansible_os_family == 'Debian'
+  register: svn_init_copy
+
+# Workaround for bug https://github.com/ansible/ansible-modules-core/issues/915.
+- name: Run systemd daemon_reload (Ubuntu/Debian workaround).
+  systemd:
+    name: solr
+    daemon_reload: yes
+  when: >
+    (svn_init_copy.changed)
+    and ((ansible_distribution == 'Ubuntu' and ansible_distribution_version.split(".")[0]|int >= 16)
+    or (ansible_distribution == 'Debian' and ansible_distribution_version.split(".")[0]|int >= 8))
 
 - name: Ensure SVN is started.
   service: name=svnserve state=started enabled=yes
