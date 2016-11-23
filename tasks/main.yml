@@ -55,7 +55,7 @@
 # Workaround for bug https://github.com/ansible/ansible-modules-core/issues/915.
 - name: Run systemd daemon_reload (Ubuntu/Debian workaround).
   systemd:
-    name: solr
+    name: svnserve
     daemon_reload: yes
   when: >
     (svn_init_copy.changed)
