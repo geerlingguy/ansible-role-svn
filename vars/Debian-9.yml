@@ -1,0 +1,7 @@
+---
+svn_apache_user: www-data
+svn_apache_conf_path: /etc/apache2/sites-enabled
+svn_packages:
+  - subversion
+  - libapache2-svn
+
