@@ -3,17 +3,19 @@
   include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Ensure SVN packages are installed.
-  yum: "name={{ item }} state=present"
-  with_items:
-    - mod_dav_svn
-    - subversion
+  yum:
+    name:
+      - mod_dav_svn
+      - subversion
+    state: present
   when: ansible_os_family == 'RedHat'
 
 - name: Ensure SVN packages are installed (Debian).
-  apt: "name={{ item }} state=present"
-  with_items:
-    - subversion
-    - libapache2-svn
+  apt:
+    name:
+      - subversion
+      - libapache2-svn
+    state: present
   when: ansible_os_family == 'Debian'
 
 - name: Ensure svn home folder exists.
@@ -41,7 +43,7 @@
     path: "{{ svn_repository_home }}"
     owner: "{{ svn_apache_user }}"
     group: "{{ svn_apache_user }}"
-    recurse: yes
+    recurse: true
   notify: restart apache
 
 - name: Create init script for svnserve (Debian).
@@ -56,11 +58,12 @@
 - name: Run systemd daemon_reload (Ubuntu/Debian workaround).
   systemd:
     name: svnserve
-    daemon_reload: yes
-  when: >
-    (svn_init_copy.changed)
-    and ansible_os_family == 'Debian'
-    and "ansible_service_mgr == 'systemd'"
+    daemon_reload: true
+  when:
+    - svn_init_copy.changed
+    - ansible_os_family == 'Debian'
+    - ansible_service_mgr == 'systemd'
+  tags: ['skip_ansible_lint']
 
 - name: Ensure SVN is started.
   service: name=svnserve state=started enabled=yes
