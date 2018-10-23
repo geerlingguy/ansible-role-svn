@@ -1,22 +1,14 @@
 ---
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"
+  with_first_found:
+    - "{{ ansible-distribution }}-{{ ansible_distribution_version }}.yml"
+    - "{{ ansible_os_family }}.yml"
 
 - name: Ensure SVN packages are installed.
-  yum:
-    name:
-      - mod_dav_svn
-      - subversion
+  package:
+    name: "{{ svn_packages }}"
     state: present
-  when: ansible_os_family == 'RedHat'
-
-- name: Ensure SVN packages are installed (Debian).
-  apt:
-    name:
-      - subversion
-      - libapache2-svn
-    state: present
-  when: ansible_os_family == 'Debian'
 
 - name: Ensure svn home folder exists.
   file:
