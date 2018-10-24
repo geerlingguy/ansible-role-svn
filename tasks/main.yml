@@ -2,7 +2,7 @@
 - name: Include OS-specific variables.
   include_vars: "{{ item }}"
   with_first_found:
-    - "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+    - "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
     - "{{ ansible_os_family }}.yml"
 
 - name: Ensure SVN packages are installed.
