@@ -11,6 +11,7 @@
   file:
     path: "{{ svn_repository_home }}"
     state: directory
+    mode: 0755
 
 - name: Copy subversion configuration file.
   template:
@@ -18,6 +19,7 @@
     dest: "{{ svn_apache_conf_path }}/subversion.conf"
     owner: root
     group: root
+    mode: 0644
   notify: restart apache
 
 - name: Create a test repository.
@@ -28,7 +30,7 @@
   when: svn_create_test_repo
 
 - name: Set ownership for svn directories.
-  file:
+  file:  # noqa 208
     path: "{{ svn_repository_home }}"
     owner: "{{ svn_apache_user }}"
     group: "{{ svn_apache_user }}"
