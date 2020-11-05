@@ -1,6 +1,6 @@
 # Ansible Role: SVN
 
-[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-svn.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-svn)
+[![CI](https://github.com/geerlingguy/ansible-role-svn/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-svn/actions?query=workflow%3ACI)
 
 Installs [Apache SVN](https://subversion.apache.org/) (Subversion) on any RHEL/CentOS or Debian/Ubuntu Linux system.
 
