@@ -12,18 +12,21 @@
     target: "{{ svn_repository_home | regex_replace('\\/$', '') }}/[^/]*(/.*)?"
     setype: httpd_sys_rw_content_t
     state: present
+  when: ansible_selinux is defined and ansible_selinux != False and ansible_selinux.status == 'enabled'
 
 - name: Allow apache to modify SVN config files in svn_repository_home
   sefcontext:
     target: "{{ svn_repository_home | regex_replace('\\/$', '') }}/[^/]*/conf(/.*)?"
     setype: httpd_sys_content_t
     state: present
+  when: ansible_selinux is defined and ansible_selinux != False and ansible_selinux.status == 'enabled'
 
 - name: Allow apache to modify SVN hooks in svn_repository_home
   sefcontext:
     target: "{{ svn_repository_home | regex_replace('\\/$', '') }}/[^/]*/hooks(/.*)?"
     setype: httpd_sys_script_exec_t
-    state: present 
+    state: present
+  when: ansible_selinux is defined and ansible_selinux != False and ansible_selinux.status == 'enabled'
 
 - name: Ensure svn home folder exists.
   file:
@@ -49,6 +52,7 @@
 
 - name: Apply new SELinux file context to filesystem
   command: restorecon -irv "{{ svn_repository_home }}"
+  when: ansible_selinux is defined and ansible_selinux != False and ansible_selinux.status == 'enabled'
 
 - name: Set ownership for svn directories.
   file:  # noqa 208
