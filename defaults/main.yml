@@ -1,3 +1,5 @@
 ---
 svn_repository_home: /var/svn
-svn_create_test_repo: true
+svn_public_repos: true
+svn_repos:
+  - reponame: testrepo
