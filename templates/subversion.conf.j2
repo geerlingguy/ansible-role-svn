@@ -14,7 +14,7 @@ LoadModule authz_svn_module   modules/mod_authz_svn.so
     SVNPath {{ svn_repository_home }}/{{ repo.reponame }}
     AuthzSVNAccessFile {{ svn_repository_home }}/{{ repo.reponame }}/conf/authz
     AuthType Basic
-    AuthName "{{ repo.reponame }}"
+    AuthName "{{ repo.realm }}"
     AuthUserFile {{ svn_repository_home }}/.dav_svn.passwd
     Require valid-user
     LimitXMLRequestBody 0

@@ -3,3 +3,4 @@ svn_repository_home: /var/svn
 svn_public_repos: true
 svn_repos:
   - reponame: testrepo
+    realm: "Test repository"
