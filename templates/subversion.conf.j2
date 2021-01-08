@@ -1,8 +1,24 @@
 LoadModule dav_svn_module     modules/mod_dav_svn.so
 LoadModule authz_svn_module   modules/mod_authz_svn.so
 
+{% if svn_public_repos %}
 <Location /svn>
    DAV svn
    SVNParentPath {{ svn_repository_home }}
    Allow from All
 </Location>
+{% else %}
+{% for repo in svn_repos %}
+<Location /{{ repo.reponame }}>
+    DAV svn
+    SVNPath {{ svn_repository_home }}/{{ repo.reponame }}
+    AuthzSVNAccessFile {{ svn_repository_home }}/{{ repo.reponame }}/conf/authz
+    AuthType Basic
+    AuthName "{{ repo.realm }}"
+    AuthUserFile {{ svn_repository_home }}/.dav_svn.passwd
+    Require valid-user
+    LimitXMLRequestBody 0
+    LimitRequestBody 0
+</Location>
+{% endfor %}
+{% endif %}
