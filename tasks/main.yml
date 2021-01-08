@@ -43,12 +43,12 @@
     mode: 0644
   notify: restart apache
 
-- name: Create a test repository.
+- name: Create SVN repositories
   command: >
-    svnadmin create testrepo
+    svnadmin create {{ item.reponame }}
     chdir={{ svn_repository_home }}
-    creates={{ svn_repository_home }}/testrepo/README.txt
-  when: svn_create_test_repo
+    creates={{ svn_repository_home }}/{{ item.reponame }}/README.txt
+  loop: "{{ svn_repos }}"
 
 - name: Apply new SELinux file context to filesystem
   command: restorecon -irv "{{ svn_repository_home }}"
