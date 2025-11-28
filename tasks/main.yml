@@ -1,6 +1,6 @@
 ---
 - name: Include OS-specific variables.
-  include_vars: "{{ ansible_os_family }}.yml"
+  include_vars: "{{ ansible_facts.os_family }}.yml"
 
 - name: Ensure SVN packages are installed.
   package:
@@ -42,7 +42,7 @@
     src: svnserve
     dest: /etc/init.d/svnserve
     mode: 0755
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts.os_family == 'Debian'
   register: svn_init_copy
 
 # Workaround for bug https://github.com/ansible/ansible-modules-core/issues/915.
@@ -52,8 +52,8 @@
     daemon_reload: true
   when:
     - svn_init_copy.changed
-    - ansible_os_family == 'Debian'
-    - ansible_service_mgr == 'systemd'
+    - ansible_facts.os_family == 'Debian'
+    - ansible_facts.service_mgr == 'systemd'
   tags: ['skip_ansible_lint']
 
 - name: Ensure SVN is started.
